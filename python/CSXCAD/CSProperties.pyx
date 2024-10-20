@@ -819,8 +819,8 @@ cdef class CSPropExcitation(CSProperties):
 
         openEMS excitation types:
 
-        * 0 : E-field soft excitation
-        * 1 : E-field hard excitation
+        * 0 : E-field soft excitation (adds a wave excitation to that point in the fdtd grid)
+        * 1 : E-field hard excitation (superimposes a wave excitation in the fdtd grid)
         * 2 : H-field soft excitation
         * 3 : H-field hard excitation
         * 10 : plane wave excitation

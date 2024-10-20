@@ -25,7 +25,7 @@ from CSXCAD.CSPrimitives cimport _CSPrimitives, CSPrimitives
 from CSXCAD.CSXCAD cimport ContinuousStructure
 
 cdef extern from "CSXCAD/CSProperties.h":
-    cpdef enum PropertyType "CSProperties::PropertyType":
+    cpdef enum PropertyType "CSProperties::PropretyType":
         ANY                "CSProperties::ANY"
         UNKNOWN            "CSProperties::UNKNOWN"
         MATERIAL           "CSProperties::MATERIAL"

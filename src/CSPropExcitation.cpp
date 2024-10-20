@@ -92,6 +92,7 @@ double CSPropExcitation::GetWeightedExcitation(int ny, const double* coords)
 	}
 	else
 	{
+		// Incidence calculation of electric field?
 		alpha=atan2(coords[1],coords[0]);
 		rho = sqrt(pow(coords[0],2)+pow(coords[1],2));
 		r = sqrt(pow(coords[0],2)+pow(coords[1],2)+pow(coords[2],2));
