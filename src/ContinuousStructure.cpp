@@ -82,6 +82,7 @@ void ContinuousStructure::AddProperty(CSProperties* prop)
 
 bool ContinuousStructure::ReplaceProperty(CSProperties* oldProp, CSProperties* newProp)
 {
+
 	std::vector<CSProperties*>::iterator iter;
 	for (iter=vProperties.begin();iter<vProperties.end();++iter)
 	{
@@ -128,6 +129,7 @@ void ContinuousStructure::DeleteProperty(CSProperties* prop)
 
 int ContinuousStructure::GetIndex(CSProperties* prop)
 {
+
 	if (prop==NULL) return -1;
 	for (size_t i=0;i<vProperties.size();++i)
 		if (vProperties.at(i)==prop) return (int)i;
@@ -138,6 +140,7 @@ size_t ContinuousStructure::GetQtyProperties() {return vProperties.size();}
 
 size_t ContinuousStructure::GetQtyPropertyType(CSProperties::PropertyType type)
 {
+
 	size_t count=0;
 	for (size_t i=0;i<vProperties.size();++i) if (vProperties.at(i)->GetType() & type) ++count;
 	return count;
@@ -145,6 +148,7 @@ size_t ContinuousStructure::GetQtyPropertyType(CSProperties::PropertyType type)
 
 std::vector<CSProperties*>  ContinuousStructure::GetPropertyByType(CSProperties::PropertyType type)
 {
+
 	std::vector<CSProperties*> found;
 	for (size_t i=0;i<vProperties.size();++i)
 		if (vProperties.at(i)->GetType() & type)
@@ -154,6 +158,7 @@ std::vector<CSProperties*>  ContinuousStructure::GetPropertyByType(CSProperties:
 
 size_t ContinuousStructure::GetQtyPrimitives(CSProperties::PropertyType type)
 {
+
 	size_t count = 0;
 	for (size_t i=0;i<vProperties.size();++i)
 		if (vProperties.at(i)->GetType() & type)
@@ -163,11 +168,13 @@ size_t ContinuousStructure::GetQtyPrimitives(CSProperties::PropertyType type)
 
 bool sortPrimByPrio(CSPrimitives* a, CSPrimitives* b)
 {
+
 	return a->GetPriority()<b->GetPriority();
 }
 
 std::vector<CSPrimitives*> ContinuousStructure::GetAllPrimitives(bool sorted, CSProperties::PropertyType type)
 {
+
 	std::vector<CSProperties*> props = this->GetPropertyByType(type);
 	std::vector<CSPrimitives*> vPrim;
 	vPrim.reserve(GetQtyPrimitives(type));
@@ -183,6 +190,7 @@ std::vector<CSPrimitives*> ContinuousStructure::GetAllPrimitives(bool sorted, CS
 
 CSProperties* ContinuousStructure::HasPrimitive(CSPrimitives* prim)
 {
+
 	for (size_t i=0;i<vProperties.size();++i)
 		if (vProperties.at(i)->HasPrimitive(prim))
 			return vProperties.at(i);
@@ -197,6 +205,7 @@ void ContinuousStructure::DeletePrimitive(CSPrimitives* prim)
 
 std::vector<CSPrimitives*> ContinuousStructure::GetPrimitivesByType(CSPrimitives::PrimitiveType type)
 {
+
 	UNUSED(type);
 	std::vector<CSPrimitives*> vPrim;
 	std::cerr << __func__ << ": Error, not yet implemented!" << std::endl;
@@ -308,6 +317,7 @@ CSProperties* ContinuousStructure::GetPropertyByCoordPriority(const double* coor
 	CSProperties* prop = NULL;
 	// search in all given primitives if coordinate given is inside
 	for (size_t i=0;i<primList.size();++i)
+	    // If the primitive list 
 		if (primList.at(i)->IsInside(coord))
 		{
 			if (foundPrimitive)

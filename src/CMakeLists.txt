@@ -93,6 +93,7 @@ TARGET_LINK_LIBRARIES( CSXCAD
   CGAL
   ${Boost_LIBRARIES}
   ${vtk_LIBS}
+  log4cxx
 )
 
 set_target_properties(CSXCAD PROPERTIES VERSION ${LIB_VERSION_STRING}

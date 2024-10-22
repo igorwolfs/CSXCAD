@@ -26,20 +26,6 @@ IF(EXISTS ${PROJECT_SOURCE_DIR}/localConfig.cmake)
    include(${PROJECT_SOURCE_DIR}/localConfig.cmake)
 ENDIF()
 
-# add git revision
-IF(EXISTS ${PROJECT_SOURCE_DIR}/.git )
-  FIND_PACKAGE(Git)
-  # Get the latest abbreviated commit hash of the working branch
-  execute_process(
-    COMMAND ${GIT_EXECUTABLE} describe --tags
-    WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-    OUTPUT_VARIABLE GITREV
-  )
-  set(VERSION ${GITREV})
-  string(STRIP ${VERSION} VERSION)
-  message(STATUS "Found Git repository, ${PROJECT_NAME} version tag: ${VERSION}")
-ENDIF()
-
 ADD_DEFINITIONS(-DGIT_VERSION=\"${VERSION}\")
 
 if (WIN32)
@@ -68,6 +54,7 @@ endif()
 
 # Set locations of CMake modules
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CSXCAD_SOURCE_DIR}/cmake/Modules/")
+
 
 # fparser
 # $ cmake -D FPARSER_ROOT_DIR=~/opt/openEMS .
@@ -108,6 +95,11 @@ ADD_DEFINITIONS( -DH5_USE_16_API )
 #ADD_DEFINITIONS( -DH5_BUILT_AS_DYNAMIC_LIB )
 
 # message(status "hdf5 all libs: ${HDF5_LIBRARIES}")
+
+# NEW
+find_package(log4cxx REQUIRED)
+INCLUDE_DIRECTORIES(${LOG4CXX_INCLUDE_DIR})
+
 
 find_package(CGAL REQUIRED)
 INCLUDE_DIRECTORIES (${CGAL_INCLUDE_DIR})

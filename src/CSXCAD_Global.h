@@ -39,9 +39,11 @@
 // declare a parameter as unused
 #define UNUSED(x) (void)(x);
 
+
 enum CoordinateSystem
 {
 	CARTESIAN, CYLINDRICAL, UNDEFINED_CS
 };
+
 
 #endif /*CSXCAD_GLOBAL_H_*/
