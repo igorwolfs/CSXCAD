@@ -43,6 +43,7 @@ def Unique(l, tol=1e-7):
     l = np.unique(l)
     dl = np.diff(l)
     idx = np.where(dl<np.mean(dl)*tol)[0]
+
     if len(idx)>0:
         l = np.delete(l, idx)
 
@@ -200,18 +201,22 @@ def SmoothMeshLines(lines, max_res, ratio=1.5, **kw):
         Ratio of increase or decrease of neighboring mesh lines
 
     """
+    # Gets unique lines and removes lines that are too close together.
     out_l = Unique(lines)
+    # 1 or 2 if symmetrical lines, 0 if not
     sym = CheckSymmetry(out_l)
+    # If non-symmetrical lines and uneven number of points
     if sym==1:
         center = 0.5*(out_l[-1]+out_l[0])
         out_l = out_l[:int(len(out_l)/2)+1]
+    # If symmetrical lines and even number of points
     elif sym==2:
         center = 0.5*(out_l[-1]+out_l[0])
         out_l = out_l[:int(len(out_l)/2)]
 
     dl = np.diff(out_l)
 
-    while len(np.where(dl>max_res)[0])>0:
+    while (len(np.where(dl>max_res)[0]) > 0):
         N = len(out_l)
         dl[dl<=max_res] = np.max(dl)*2
         idx = np.argmin(dl)

@@ -111,4 +111,5 @@ protected:
 	ParameterScalar WeightFct[3];		// excitation amplitude weighting function
 	ParameterScalar PropagationDir[3];	// direction of propagation (should be a unit vector), needed for plane wave excitations
 	ParameterScalar Delay;				// excitation delay only, for time-domain solver e.g. FDTD
+	// NOTE: in addition to these params there's also the vPrimitives (e.g.: Box: which is a 2D structure defining the excitation region)
 };

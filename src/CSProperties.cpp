@@ -296,6 +296,7 @@ CSPrimitives* CSProperties::CheckCoordInPrimitive(const double *coord, int &prio
 	bool found=false;
 	for (size_t i=0; i<vPrimitives.size();++i)
 	{
+		//> coord: set of [x, y, z]
 		if (vPrimitives.at(i)->IsInside(coord,tol)==true)
 		{
 			if (found==false)

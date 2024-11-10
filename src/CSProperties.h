@@ -206,6 +206,7 @@ protected:
 	ParameterSet* coordParaSet;
 	//! x,y,z,rho,r,a,t one for all coord-systems (rho distance to z-axis (cylinder-coords), r for distance to origin)
 	void InitCoordParameter();
+	// Coordinate system parameters for excitation
 	Parameter* coordPara[7];
 	CoordinateSystem coordInputType;
 	PropertyType Type;

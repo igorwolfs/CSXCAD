@@ -115,14 +115,17 @@ bool CSPrimBox::IsInside(const double* Coord, double /*tol*/)
 {
 	if (Coord==NULL) return false;
 
+	// Start -> Stop: defines start and stop of the CSPrimBox
 	const double* start = m_Coords[0].GetCoords(m_PrimCoordSystem);
-	const double* stop  = m_Coords[1].GetCoords(m_PrimCoordSystem);
+	const double* stop = m_Coords[1].GetCoords(m_PrimCoordSystem);
 	double pos[3] = {Coord[0],Coord[1],Coord[2]};
 
 	TransformCoords(pos, true, m_MeshType);
 	//transform incoming coordinates into the coorindate system of the primitive
 	TransformCoordSystem(pos,pos,m_MeshType,m_PrimCoordSystem);
 
+	//> Checks if the "Coord" are in the range [start, stop]
+	//> So if the start-stop box is a plane, than a mesh without an actual plane in this position won't will result in no excitation source
 	if (m_PrimCoordSystem!=UNDEFINED_CS)
 		return CoordInRange(pos, start, stop, m_PrimCoordSystem);
 	else

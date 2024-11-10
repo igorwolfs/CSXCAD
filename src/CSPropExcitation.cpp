@@ -81,6 +81,7 @@ double CSPropExcitation::GetWeightedExcitation(int ny, const double* coords)
 	//Warning: this is not reentrant....!!!!
 	double loc_coords[3] = {coords[0],coords[1],coords[2]};
 	double r,rho,alpha,theta;
+	// POLAR
 	if (coordInputType==1)
 	{
 		loc_coords[0] = coords[0]*cos(coords[1]);
@@ -90,6 +91,7 @@ double CSPropExcitation::GetWeightedExcitation(int ny, const double* coords)
 		r = sqrt(pow(coords[0],2)+pow(coords[2],2));
 		theta=asin(1)-atan(coords[2]/rho);
 	}
+	// CARTESIAN
 	else
 	{
 		// Incidence calculation of electric field?
@@ -110,7 +112,10 @@ double CSPropExcitation::GetWeightedExcitation(int ny, const double* coords)
 	{
 		std::cerr << "CSPropExcitation::GetWeightedExcitation: Error evaluating the weighting function (ID: " << this->GetID() << ", n=" << ny << "): " << PSErrorCode2Msg(EC) << std::endl;
 	}
-
+	
+	// GetExcitation(ny): Gets amplitude component of excitation in that direction
+	// .GetValue(): Gets weight in this direction
+	//! Might be that on the evaluation of the weight-function it actually does take into account the vector and decreases the amplitude with that vector
 	return WeightFct[ny].GetValue()*GetExcitation(ny);
 }
 
@@ -234,7 +239,7 @@ bool CSPropExcitation::Write2XML(TiXmlNode& root, bool parameterised, bool spars
 
 	return true;
 }
-
+// Read vector term from excitation
 bool CSPropExcitation::ReadFromXML(TiXmlNode &root)
 {
 	if (CSProperties::ReadFromXML(root)==false) return false;

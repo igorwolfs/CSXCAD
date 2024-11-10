@@ -280,6 +280,7 @@ CSProperties* ContinuousStructure::GetPropertyByCoordPriority(const double* coor
 	{
 		if ((type==CSProperties::ANY) || (vProperties.at(i)->GetType() & type))
 		{
+			// DrawingTol: tolerance for checking
 			locPrim = vProperties.at(i)->CheckCoordInPrimitive(coord,locPrio,dDrawingTol);
 			if (locPrim)
 			{
@@ -497,6 +498,7 @@ bool ContinuousStructure::Write2XML(std::string file, bool parameterised, bool s
 	return doc.SaveFile();
 }
 
+// * I believe this one is used mostly in our case.
 const char* ContinuousStructure::ReadFromXML(TiXmlNode* rootNode)
 {
 	clear();
@@ -534,6 +536,8 @@ const char* ContinuousStructure::ReadFromXML(TiXmlNode* rootNode)
 
 	TiXmlElement* PropNode = probs->FirstChildElement();
 	CSProperties* newProp=NULL;
+
+	// Reading out all different types of nodes and creating relevant class (e.g.: CSPropExcitation)
 	while (PropNode!=NULL)
 	{
 		const char* cProp=PropNode->Value();
